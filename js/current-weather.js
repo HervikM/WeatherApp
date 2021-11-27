@@ -25,17 +25,18 @@ function setCurrentTemp($el, temp){
 }
 
 // Backgrounds Function
-function solarStatus(sunsetTime, sunriseTime){
-   const currentHours = new Date().getHours()
-   const sunsetHours = sunsetTime.getHours()
-   const sunriseHours = sunriseTime.getHours()
+function solarStatus(currentTime,sunsetTime, sunriseTime){
+   const currentHours = currentTime.getHours() //Hora actual
+   const sunsetHours = sunsetTime.getHours()  //Amanece
+   const sunriseHours = sunriseTime.getHours()  //Anochece
+   console.log(currentHours)
+   console.log(sunsetHours)
+   console.log(sunriseHours)
 
-   if(currentHours > sunsetHours || currentHours < sunriseHours){
-      console.log(currentHours)
+   if(currentHours > sunriseHours || currentHours < sunsetHours){
       return 'night'
    }
    return 'morning'
-
 
 }
 
@@ -77,10 +78,11 @@ function configCurrentWeather(weather){
    setCurrentTemp($currentWeatherTemp, temp)
 
    // Back
+   const currentTime = new Date()
    const sunriseTime = new Date( weather.sys.sunrise * 1000)
    const sunsetTime = new Date(weather.sys.sunset * 1000)
    const conditionCode = String(weather.weather[0].id).charAt(0)
-   setBackground($app, conditionCode, solarStatus(sunriseTime, sunsetTime))
+   setBackground($app, conditionCode, solarStatus(currentTime,sunriseTime, sunsetTime))
 
 }
 
@@ -95,7 +97,5 @@ export default async function currentWeather(){
    const { isError:currentWeatherError, data: weather} = await getCurrentWeather( lat, lon)
    if(currentWeatherError) return console.log("Error al traer los datos del clima")
    configCurrentWeather(weather)
-
-
 
 }
