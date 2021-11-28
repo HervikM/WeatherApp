@@ -1,17 +1,17 @@
 import { createDOM } from './utils/dom.js'
 import { formatTemp, formatDate } from './utils/format-data.js'
 
-export function periodTimeTemplate({temp, date, icon, description}){
+export function periodTimeTemplate({temp, date, icon, description, index}){
    return `
-      <li class="dayWeather-item is-selected">
+      <li class="dayWeather-item" data-id="${index}">
           <span class="dayWeather-time">${date}</span>
-          <img class="dayWeather-icon" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}" rain="">
+          <img class="dayWeather-icon" width="48" height="48" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}" rain="">
           <span class="dayWeather-temp">${temp}</span>
       </li>
    `
 }
 
-export function createPeriodTime(weather){
+export function createPeriodTime(weather, index){
    // debugger
    // temp
    // icon
@@ -29,7 +29,8 @@ export function createPeriodTime(weather){
       temp,
       date,
       icon:weather.weather[0].icon,
-      description: weather.weather[0].description
+      description: weather.weather[0].description,
+      index,
    }
    // debugger
    return createDOM(periodTimeTemplate(config))

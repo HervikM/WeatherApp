@@ -23,6 +23,7 @@ export function formatWeekList(rawData){
       if((index + 1) % 8 === 0){
          weekList.push(dayList)
          dayList = []
+         // debugger
       }
    })
 

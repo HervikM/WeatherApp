@@ -4,6 +4,30 @@
   border-radius: 1rem 1rem 0 0;
   /* transform: translateY(calc(100% - 1.5rem)); */
   user-select: none;
+  touch-action: none;
+}
+
+.weather-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: start;
+  padding: .8rem;
+  /* border: 1px solid red; */
+  color: var(--white);
+}
+
+.weather-features p{
+  /* border: 1px solid red; */
+  background-color: #393939;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  margin: auto;
+
+}
+.weather-features p:nth-of-type(3),
+  .weather-features p:nth-of-type(4){
+  margin-top: 1rem;
 }
 
 .weeklyWeather.is-active {
